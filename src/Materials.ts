@@ -1,4 +1,4 @@
-import { ColorHex } from "./Mural"
+import { ColorHex } from "./Global"
 
 export class Materials {
 

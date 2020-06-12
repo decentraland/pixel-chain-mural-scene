@@ -59,4 +59,3 @@ export class Mural<T> {
 }
 
 export type TilePosition = { x: number, y: number }
-export type ColorHex = string
