@@ -1,8 +1,8 @@
 
-import { Materials } from "../Materials"
 import { MultiplayerEntity } from "../MultiplayerEntity"
-import { ColorHex } from "../Global"
 import { Swatch } from "./Swatch"
+import { ColorHex } from "../../Global"
+import { Materials } from "../../Materials"
 
 const DEFAULT_COLORS: ColorHex[] = [
     `#E4A672`,

@@ -1,6 +1,8 @@
-import { ColorHex, Global } from "../Global"
 import { SwatchIndex } from "./MultiplayerPalette"
-import { Materials } from "../Materials"
+import { ColorHex, Global } from "../../Global"
+import { Materials } from "../../Materials"
+import { showInput, showMessage } from "../../ui/Modals"
+import { playSound } from "../../sounds/Sounds"
 
 export class Swatch extends Entity {
 
@@ -15,17 +17,21 @@ export class Swatch extends Entity {
             if (buttonId === 1) {
                 // Pick color
                 Global.currentColor = this.color
+                playSound()
             } else if (buttonId === 2) {
                 // Change swatch
-                canvas.visible = true
-                textInput.placeholder = this.color
-                textInput.onTextSubmit = new OnTextSubmit((x) => {
-                    // TODO: Validate color
-                    const color = x.text.trim().slice(0, 7)
-                    this.setColor(color)
-                    canvas.visible = false
-                    Global.currentColor = this.color
-                    onSwatchChangeListener(color)
+                showInput('PLEASE INSERT A COLOR (HEX)', 'COLOR:', this.color, (text) => {
+                    let color = text.trim().slice(0, 7)
+                    if (color.substr(0, 1) !== '#') {
+                        color = '#' + color
+                    }
+                    if (/^#[0-9A-F]{6}$/i.test(color)) {
+                        this.setColor(color)
+                        Global.currentColor = this.color
+                        onSwatchChangeListener(color)
+                    } else {
+                        showMessage('ERROR', 'THE ENTERED COLOR WAS INVALID', 3000)
+                    }
                 })
             }
         },
@@ -41,16 +47,3 @@ export class Swatch extends Entity {
         this.addComponentOrReplace(new PlaneShape())
     }
 }
-
-const canvas = new UICanvas()
-canvas.visible = false
-
-const textInput = new UIInputText(canvas)
-textInput.width = "140px"
-textInput.height = "35px"
-textInput.vAlign = "bottom"
-textInput.hAlign = "center"
-textInput.fontSize = 30
-textInput.placeholderColor = Color4.Gray()
-textInput.positionY = "200px"
-textInput.isPointerBlocker = true

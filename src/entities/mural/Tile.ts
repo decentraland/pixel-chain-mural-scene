@@ -1,18 +1,12 @@
-import { TILE_SIZE, GAP_BETWEEN_TILES } from '../Config'
+import { TILE_SIZE, GAP_BETWEEN_TILES } from '../../Config'
 import { TilePosition } from './Mural'
-import { Materials } from '../Materials'
-import { Global, ColorHex } from '../Global'
+import { Materials } from '../../Materials'
+import { Global, ColorHex } from '../../Global'
+import { playSound } from '../../sounds/Sounds'
 
 // Shape
 const boxShape = new BoxShape()
 boxShape.withCollisions = false
-
-// Sound
-const sound = new Entity()
-sound.addComponent(new Transform())
-sound.getComponent(Transform).position = Camera.instance.position
-sound.addComponent(new AudioSource(new AudioClip('sounds/navigationForward.mp3')))
-engine.addEntity(sound)
 
 export class Tile extends Entity {
 
@@ -25,7 +19,7 @@ export class Tile extends Entity {
 
         this.addComponent(new OnPointerDown(() => {
             // Play sound
-            sound.getComponent(AudioSource).playOnce()
+            playSound()
 
             // Update this tile
             this.setColor(Global.currentColor)

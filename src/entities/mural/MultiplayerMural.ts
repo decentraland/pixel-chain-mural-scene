@@ -1,9 +1,9 @@
-import { MURAL_WIDTH, MURAL_HEIGHT, EMPTY_COLOR } from "../Config"
+import { MURAL_WIDTH, MURAL_HEIGHT, EMPTY_COLOR } from "../../Config"
 import { Mural, TilePosition } from "./Mural"
 import { Tile } from "./Tile"
-import { shuffleArray } from "../Utils"
+import { shuffleArray } from "../../Utils"
 import { MultiplayerEntity } from "../MultiplayerEntity"
-import { ColorHex } from "../Global"
+import { ColorHex } from "../../Global"
 
 // A mural than can be shared with other players
 export class MultiplayerMural extends MultiplayerEntity<TilePosition, ColorHex, string> {

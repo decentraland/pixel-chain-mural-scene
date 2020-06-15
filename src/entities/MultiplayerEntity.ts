@@ -1,4 +1,4 @@
-import { setTimeout } from "./Utils"
+import { setTimeout } from "../Utils"
 
 /**
  * This class represents an entity that needs to be synced with multiple players.

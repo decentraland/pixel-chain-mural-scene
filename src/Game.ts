@@ -1,6 +1,7 @@
-import { MultiplayerMural } from './mural/MultiplayerMural'
 import { setTimeout, addOneTimeTrigger } from './Utils'
-import { MultiplayerPalette } from './palette/MultiplayerPalette'
+import { MultiplayerMural } from './entities/mural/MultiplayerMural'
+import { MultiplayerPalette } from './entities/palette/MultiplayerPalette'
+import { showInput, showMessage } from './ui/Modals'
 
 // Base scene
 const baseScene = new Entity()
@@ -51,4 +52,3 @@ addOneTimeTrigger(
     new Vector3(8, 0, 8),
     new Vector3(1, 8, 1),
     () => mural.show())
-
