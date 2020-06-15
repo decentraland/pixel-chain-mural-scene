@@ -1,38 +1,42 @@
-import { MURAL_WIDTH, MURAL_HEIGHT, EMPTY_COLOR } from "../../Config"
+import { MURAL_SIZE, START_SWATCH } from "../../Config"
 import { Mural, TilePosition } from "./Mural"
 import { Tile } from "./Tile"
 import { shuffleArray } from "../../Utils"
 import { MultiplayerEntity } from "../MultiplayerEntity"
-import { ColorHex } from "../../Global"
+import { SwatchIndex } from "../palette/MultiplayerPalette"
+import { Materials } from "../Materials"
 
 // A mural than can be shared with other players
-export class MultiplayerMural extends MultiplayerEntity<TilePosition, ColorHex, string> {
+export class MultiplayerMural extends MultiplayerEntity<TilePosition, SwatchIndex, string> {
 
     constructor() {
         super('mural')
     }
 
-    private colorMural: Mural<ColorHex>
+    private colorMural: Mural<SwatchIndex>
     private entityMural: Mural<Tile>
 
     protected runInitialLoad(): void {
-        this.entityMural = Mural.initializeEmpty(MURAL_WIDTH, MURAL_HEIGHT, (position) => {
-            const tile = new Tile(position, (color) => this.changeEntity(position, color))
+        this.entityMural = Mural.initializeEmpty(MURAL_SIZE, MURAL_SIZE, (position) => {
+            const tile = new Tile(position, (index) => this.changeEntity(position, index))
             tile.setParent(this)
             return tile
         })
     }
 
     protected getFullStateDefaults(): string {
-        return Mural.initializeEmpty(MURAL_WIDTH, MURAL_HEIGHT, () => EMPTY_COLOR).toJson()
+        return Mural.initializeEmpty(MURAL_SIZE, MURAL_SIZE, () => START_SWATCH).toJson()
     }
 
     protected initializeWithFullState(fullState: string): void {
-        this.colorMural = Mural.fromJSON<ColorHex>(fullState)
+        this.colorMural = Mural.fromJSON<SwatchIndex>(fullState)
 
         // Set the colors on the mural
         this.colorMural.getAllTiles()
-            .forEach(({ pos, value: color }) => this.entityMural.getTile(pos).setColor(color))
+            .forEach(({ pos, value: idx }) => {
+                const color = Materials.getForIndex(idx)
+                this.entityMural.getTile(pos).setIndex(idx)
+            })
     }
 
     protected getFullStateToShare(): string {
@@ -44,9 +48,9 @@ export class MultiplayerMural extends MultiplayerEntity<TilePosition, ColorHex, 
         tiles.forEach(({ value: tile }) => tile.setVisible())
     }
 
-    protected onChange(position: TilePosition, color: ColorHex): void {
-        this.colorMural.setTile(position, color)
-        this.entityMural.getTile(position).setColor(color)
+    protected onChange(position: TilePosition, index: SwatchIndex): void {
+        this.colorMural.setTile(position, index)
+        this.entityMural.getTile(position).setIndex(index)
     }
 
 }

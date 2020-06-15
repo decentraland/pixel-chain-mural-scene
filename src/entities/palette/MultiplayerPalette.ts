@@ -2,7 +2,7 @@
 import { MultiplayerEntity } from "../MultiplayerEntity"
 import { Swatch } from "./Swatch"
 import { ColorHex } from "../../Global"
-import { Materials } from "../../Materials"
+import { Materials } from "../Materials"
 
 const DEFAULT_COLORS: ColorHex[] = [
     `#E4A672`,
@@ -31,7 +31,7 @@ export class MultiplayerPalette extends MultiplayerEntity<SwatchIndex, ColorHex,
     constructor() {
         super('palette')
         this.addComponent(new PlaneShape())
-        this.addComponent(Materials.getForColor('#666666'))
+        this.addComponent(Materials.buildMaterial('#666666'))
         engine.addEntity(this)
     }
 
@@ -61,6 +61,7 @@ export class MultiplayerPalette extends MultiplayerEntity<SwatchIndex, ColorHex,
     }
 
     protected onChange(changeIdentifier: SwatchIndex, changeValue: ColorHex): void {
+        this.colors[changeIdentifier] = changeValue
         this.swatches[changeIdentifier].setColor(changeValue)
     }
 

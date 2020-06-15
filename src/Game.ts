@@ -35,6 +35,8 @@ mural.addComponent(
 setTimeout(2000, () => {
     mural.startLoading()
     palette.startLoading()
+    palette.startSyncing();
+
 })
 
 // When the user enters the scene, it starts syncing with other players
@@ -43,7 +45,6 @@ addOneTimeTrigger(
     new Vector3(15, 8, 15),
     () => {
         mural.startSyncing()
-        palette.startSyncing();
         palette.show();
     })
 

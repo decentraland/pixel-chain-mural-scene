@@ -1,6 +1,6 @@
 import { SwatchIndex } from "./MultiplayerPalette"
 import { ColorHex, Global } from "../../Global"
-import { Materials } from "../../Materials"
+import { Materials } from "../Materials"
 import { showInput, showMessage } from "../../ui/Modals"
 import { playSound } from "../../sounds/Sounds"
 
@@ -8,7 +8,7 @@ export class Swatch extends Entity {
 
     private color: ColorHex
 
-    constructor(index: SwatchIndex, onSwatchChangeListener: (color: ColorHex) => void) {
+    constructor(private readonly index: SwatchIndex, onSwatchChangeListener: (color: ColorHex) => void) {
         super()
         const x = ((index % 4) + 1) / 6 - 0.43
         const y = Math.floor(index / 4) * -0.17 + 0.25
@@ -16,7 +16,7 @@ export class Swatch extends Entity {
         this.addComponent(new OnPointerDown(({ buttonId }) => {
             if (buttonId === 1) {
                 // Pick color
-                Global.currentColor = this.color
+                Global.currentIndex = this.index
                 playSound()
             } else if (buttonId === 2) {
                 // Change swatch
@@ -27,7 +27,7 @@ export class Swatch extends Entity {
                     }
                     if (/^#[0-9A-F]{6}$/i.test(color)) {
                         this.setColor(color)
-                        Global.currentColor = this.color
+                        Global.currentIndex = this.index
                         onSwatchChangeListener(color)
                     } else {
                         showMessage('ERROR', 'THE ENTERED COLOR WAS INVALID', 3000)
@@ -40,7 +40,7 @@ export class Swatch extends Entity {
 
     public setColor(color: ColorHex) {
         this.color = color
-        this.addComponentOrReplace(Materials.getForColor(color))
+        this.addComponentOrReplace(Materials.setForIndex(this.index, color))
     }
 
     public setVisible() {

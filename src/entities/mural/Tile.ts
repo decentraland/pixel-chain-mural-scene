@@ -1,8 +1,9 @@
 import { TILE_SIZE, GAP_BETWEEN_TILES } from '../../Config'
 import { TilePosition } from './Mural'
-import { Materials } from '../../Materials'
-import { Global, ColorHex } from '../../Global'
+import { Materials } from '../Materials'
+import { Global } from '../../Global'
 import { playSound } from '../../sounds/Sounds'
+import { SwatchIndex } from '../palette/MultiplayerPalette'
 
 // Shape
 const boxShape = new BoxShape()
@@ -10,7 +11,7 @@ boxShape.withCollisions = false
 
 export class Tile extends Entity {
 
-    constructor(position: TilePosition, onClickListener: (color: ColorHex) => void) {
+    constructor(position: TilePosition, onClickListener: (index: SwatchIndex) => void) {
         super()
         const xPosition = position.x * (TILE_SIZE + GAP_BETWEEN_TILES)
         const yPosition = position.y * (TILE_SIZE + GAP_BETWEEN_TILES)
@@ -22,10 +23,10 @@ export class Tile extends Entity {
             playSound()
 
             // Update this tile
-            this.setColor(Global.currentColor)
+            this.setIndex(Global.currentIndex)
 
             // Call listener
-            onClickListener(Global.currentColor)
+            onClickListener(Global.currentIndex)
         },
         {
             button: ActionButton.POINTER,
@@ -37,7 +38,7 @@ export class Tile extends Entity {
         this.addComponent(boxShape)
     }
 
-    public setColor(color: ColorHex): void {
-        this.addComponentOrReplace(Materials.getForColor(color))
+    public setIndex(index: SwatchIndex): void {
+        this.addComponentOrReplace(Materials.getForIndex(index))
     }
 }

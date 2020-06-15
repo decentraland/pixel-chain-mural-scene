@@ -1,6 +1,7 @@
+import { SwatchIndex } from "./entities/palette/MultiplayerPalette"
 
 export type ColorHex = string
 
 export class Global {
-    static currentColor: ColorHex = `#E4A672`
+    static currentIndex: SwatchIndex = 0
 }
