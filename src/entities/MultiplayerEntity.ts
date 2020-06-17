@@ -81,14 +81,14 @@ export abstract class MultiplayerEntity<ChangeIdentifier, ChangeValue, FullState
         this.ifNotHappenedAlready('visible', () => this.setAsVisible())
     }
 
+    /** Return the full state so that it can be shared with users that just entered the scene */
+    public abstract getFullStateToShare(): FullState | undefined
     /** Executed first, to start initializing all entity's children. It's not expected to be shown already */
     protected abstract runInitialLoad(): void
     /** If there is no other players on the scene, then start the entity with some default settings */
     protected abstract getFullStateDefaults(): FullState
     /** When we get a full state, we should update the entity accordingly */
     protected abstract initializeWithFullState(fullState: FullState): void
-    /** Return the full state so that it can be shared with users that just entered the scene */
-    protected abstract getFullStateToShare(): FullState | undefined
     /** When a change happens, we should update the entity accordingly */
     protected abstract onChange(changeIdentifier: ChangeIdentifier, changeValue: ChangeValue): void
     /** Set the entity as visible */

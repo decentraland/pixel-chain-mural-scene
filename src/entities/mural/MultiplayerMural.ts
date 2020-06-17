@@ -7,7 +7,7 @@ import { SwatchIndex } from "../palette/MultiplayerPalette"
 import { Materials } from "../Materials"
 
 // A mural than can be shared with other players
-export class MultiplayerMural extends MultiplayerEntity<TilePosition, SwatchIndex, string> {
+export class MultiplayerMural extends MultiplayerEntity<TilePosition, SwatchIndex, SwatchIndex[][]> {
 
     constructor() {
         super('mural')
@@ -24,12 +24,12 @@ export class MultiplayerMural extends MultiplayerEntity<TilePosition, SwatchInde
         })
     }
 
-    protected getFullStateDefaults(): string {
-        return Mural.initializeEmpty(MURAL_SIZE, MURAL_SIZE, () => START_SWATCH).toJson()
+    protected getFullStateDefaults(): SwatchIndex[][] {
+        return Mural.initializeEmpty(MURAL_SIZE, MURAL_SIZE, () => START_SWATCH).getValues()
     }
 
-    protected initializeWithFullState(fullState: string): void {
-        this.colorMural = Mural.fromJSON<SwatchIndex>(fullState)
+    protected initializeWithFullState(fullState: SwatchIndex[][]): void {
+        this.colorMural = Mural.fromValues<SwatchIndex>(fullState)
 
         // Set the colors on the mural
         this.colorMural.getAllTiles()
@@ -39,8 +39,8 @@ export class MultiplayerMural extends MultiplayerEntity<TilePosition, SwatchInde
             })
     }
 
-    protected getFullStateToShare(): string {
-        return this.colorMural?.toJson()
+    public getFullStateToShare(): SwatchIndex[][] | undefined {
+        return this.colorMural?.getValues()
     }
 
     protected setAsVisible(): void {

@@ -56,7 +56,7 @@ export class MultiplayerPalette extends MultiplayerEntity<SwatchIndex, ColorHex,
         }
     }
 
-    protected getFullStateToShare(): ColorHex[] {
+    public getFullStateToShare(): ColorHex[] | undefined {
         return this.colors
     }
 

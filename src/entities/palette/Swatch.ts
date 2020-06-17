@@ -21,10 +21,11 @@ export class Swatch extends Entity {
             } else if (buttonId === 2) {
                 // Change swatch
                 showInput('PLEASE INSERT A COLOR (HEX)', 'COLOR:', this.color, (text) => {
-                    let color = text.trim().slice(0, 7)
+                    let color = text.trim()
                     if (color.substr(0, 1) !== '#') {
                         color = '#' + color
                     }
+                    color = color.slice(0, 7)
                     if (/^#[0-9A-F]{6}$/i.test(color)) {
                         this.setColor(color)
                         Global.currentIndex = this.index

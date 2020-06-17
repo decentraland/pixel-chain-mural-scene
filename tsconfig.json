@@ -3,6 +3,6 @@
     "outFile": "./bin/game.js",
     "allowJs": true
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/entities/publisher/contracts/Abi"],
   "extends": "./node_modules/decentraland-ecs/types/tsconfig.json"
 }

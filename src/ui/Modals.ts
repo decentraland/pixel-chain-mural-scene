@@ -66,7 +66,7 @@ textInput.positionX = 30
 textInput.background = Color4.Yellow()
 textInput.color = Color4.White()
 
-export function showInput(titleText: string, inputNameText: string, placeHolder: string, onTextSubmit: (text: string) => void): () => void {
+export function showInput(titleText: string, inputNameText: string, placeHolder: string, onTextSubmit: (text: string) => void): void {
     container.visible = true
     messageText.visible = false
     title.value = titleText.toUpperCase()
@@ -77,9 +77,8 @@ export function showInput(titleText: string, inputNameText: string, placeHolder:
     textInput.isPointerBlocker = true
     textInput.onTextSubmit = new OnTextSubmit(({ text }) => {
         container.visible = false
-        onTextSubmit(text)
+        onTextSubmit(text.toUpperCase())
     })
-    return () => { container.visible = false }
 }
 
 export function showMessage(titleText: string, text: string, delay: number) {

@@ -1,7 +1,7 @@
 import { setTimeout, addOneTimeTrigger } from './Utils'
 import { MultiplayerMural } from './entities/mural/MultiplayerMural'
 import { MultiplayerPalette } from './entities/palette/MultiplayerPalette'
-import { showInput, showMessage } from './ui/Modals'
+import { PublishButton } from './entities/publisher/PublishButton'
 
 // Base scene
 const baseScene = new Entity()
@@ -28,6 +28,10 @@ mural.addComponent(
     })
 )
 
+// Add publish button
+const button = new PublishButton(mural, palette)
+button.addComponent(new Transform({ position: new Vector3(8, 0, 8) }))
+
 // We have to split the loading process into different parts, so that the scene can load fast,
 // and also users don't see the mural loading for too much time
 
@@ -50,6 +54,9 @@ addOneTimeTrigger(
 
 // When the user is near the mural, then start showing it
 addOneTimeTrigger(
-    new Vector3(8, 0, 8),
+    new Vector3(10, 0, 8),
     new Vector3(1, 8, 1),
-    () => mural.show())
+    () => {
+        mural.show()
+        button.show() // Show the button here, to make sure that everything is synced
+    })
