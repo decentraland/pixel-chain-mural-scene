@@ -41,7 +41,7 @@ export function addOneTimeTrigger(position: Vector3, size: Vector3, onFirstPlaye
                 onFirstPlayerEnter()
             }
         }, null, //onCameraExit
-        true))
+        false))
 
     if (parent) {
         trigger.setParent(parent)
