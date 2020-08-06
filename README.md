@@ -52,13 +52,9 @@ On the different colors of the pallette press E to pick a color, then click on t
 
 You can also press F on one of the colors of the swatch to open a UI where you can set a different Hex color. Pixelchain NFTs can only contain up to 12 different colors, but you can pick which colors. So you can change any of the colors and this will be also synced w other players.
 
-<<<<<<< HEAD
-When you're happy with your creation, you can mint it as a PixelChain NFT.
-=======
 
 When you're happy with your creation, click on the pink cube next to the mural and it will open a UI where you can give your work a name and mint it as a PixelChain NFT.
 
-> > > > > > > 2de058313360acac3317bee2e85c2fd9bebb8680
 
 Learn more about how to build your own scenes in our [documentation](https://docs.decentraland.org/) site.
 
