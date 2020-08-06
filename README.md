@@ -46,7 +46,11 @@ Paste the following to the end of the URL in the browser window:
 `&ENABLE_WEB3`
 For example, if the URL is http://127.0.0.1:8000?position=0%2C0&SCENE_DEBUG_PANEL, make it http://127.0.0.1:8000?position=0%2C0&SCENE_DEBUG_PANEL&ENABLE_WEB3
 
+
+> Note: The mural itself may take some time to load before you can see it.
+
 > Note: When running a preview of a scene that uses one of the ethereum libraries, you must have Metamask or Dapper open and you must add this string.
+
 
 **Scene Usage**
 
