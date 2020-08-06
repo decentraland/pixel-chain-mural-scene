@@ -1,11 +1,10 @@
-# Mural Example Scene 
+# Mural Example Scene
 
 _A screenshot of the mural-example-scene running in preview._
 
-
 This scene lets you paint a mural by coloring one pixel at a time in a grid of 32 x 32 pixels. You can then mint the resulting mural as an NFT on PixelChain.
 
-![screenshot](https://github.com/decentraland-scenes/mural-example-scene/blob/master/screenshots/screenshot.png)
+<img src="screenshot/screenshot.png" width="500">
 
 This scene shows you:
 
@@ -15,10 +14,6 @@ This scene shows you:
 - How to display a UI with buttons and input fields
 - How to use trigger areas to delay the rendering of entities till a player enters an area
 - How to change the materials of a primitive shape
-
-
-
-
 
 ## Try it out
 
@@ -40,7 +35,6 @@ $:  dcl start
 
 Any dependencies are installed and then the CLI opens the scene in a new browser tab.
 
-
 Paste the following to the end of the URL in the browser window:
 
 `&ENABLE_WEB3`
@@ -56,9 +50,7 @@ On the different colors of the pallette press E to pick a color, then click on t
 
 You can also press F on one of the colors of the swatch to open a UI where you can set a different Hex color. Pixelchain NFTs can only contain up to 12 different colors, but you can pick which colors. So you can change any of the colors and this will be also synced w other players.
 
-
 When you're happy with your creation, you can mint it as a PixelChain NFT.
-
 
 Learn more about how to build your own scenes in our [documentation](https://docs.decentraland.org/) site.
 
