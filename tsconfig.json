@@ -1,8 +1,18 @@
 {
   "compilerOptions": {
     "outFile": "./bin/game.js",
-    "allowJs": true
+    "allowJs": true,
+    "paths": {
+      "@dcl/ecs-scene-utils": [
+        "node_modules/@dcl/ecs-scene-utils/dist/index.d.ts"
+      ]
+    },
+    "baseUrl": "."
   },
-  "include": ["src/**/*.ts", "src/entities/publisher/contracts/Abi"],
-  "extends": "./node_modules/decentraland-ecs/types/tsconfig.json"
+  "include": [
+    "src/**/*.ts",
+    "src/entities/publisher/contracts/Abi"
+  ],
+  "extends": "./node_modules/decentraland-ecs/types/tsconfig.json",
+  "compileOnSave": false
 }
