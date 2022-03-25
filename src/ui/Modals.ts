@@ -1,9 +1,9 @@
-import { setTimeout } from "../Utils"
+import { setTimeout } from '../Utils'
 
 const CANVAS = new UICanvas()
 
-const LOGO_TEXTURE = new Texture("images/logo.png")
-const CLOSE_TEXTURE = new Texture("images/close.png")
+const LOGO_TEXTURE = new Texture('images/logo.png')
+const CLOSE_TEXTURE = new Texture('images/close.png')
 
 const container = new UIContainerRect(CANVAS)
 container.visible = false
@@ -35,30 +35,30 @@ close.positionX = -10
 close.positionY = -15
 close.width = 25
 close.height = close.width
-close.onClick = new OnClick(() => container.visible = false)
+close.onClick = new OnClick(() => (container.visible = false))
 close.isPointerBlocker = true
 
 const title = new UIText(container)
-title.value = "PLEASE INSERT A COLOR (HEX)"
+title.value = 'PLEASE INSERT A COLOR (HEX)'
 title.positionX = -85
 title.positionY = 38
 title.fontSize = 18
 
 const inputName = new UIText(container)
-inputName.value = "COLOR:"
+inputName.value = 'COLOR:'
 inputName.positionX = -140
 inputName.positionY = -8
 inputName.fontSize = 15
 
 const messageText = new UIText(container)
-messageText.value = "COLOR:"
+messageText.value = 'COLOR:'
 messageText.positionY = -8
 messageText.fontSize = 15
 messageText.hTextAlign = 'center'
 
 const textInput = new UIInputText(container)
-textInput.width = "280px"
-textInput.height = "35px"
+textInput.width = '280px'
+textInput.height = '35px'
 textInput.fontSize = 30
 textInput.placeholderColor = Color4.Gray()
 textInput.positionY = -22
@@ -66,29 +66,34 @@ textInput.positionX = 30
 textInput.background = Color4.Yellow()
 textInput.color = Color4.White()
 
-export function showInput(titleText: string, inputNameText: string, placeHolder: string, onTextSubmit: (text: string) => void): void {
-    container.visible = true
-    messageText.visible = false
-    title.value = titleText.toUpperCase()
-    inputName.visible = true
-    inputName.value = inputNameText.toUpperCase()
-    textInput.visible = true
-    textInput.placeholder = placeHolder
-    textInput.isPointerBlocker = true
-    textInput.onTextSubmit = new OnTextSubmit(({ text }) => {
-        container.visible = false
-        onTextSubmit(text.toUpperCase())
-    })
+export function showInput(
+  titleText: string,
+  inputNameText: string,
+  placeHolder: string,
+  onTextSubmit: (text: string) => void
+): void {
+  container.visible = true
+  messageText.visible = false
+  title.value = titleText.toUpperCase()
+  inputName.visible = true
+  inputName.value = inputNameText.toUpperCase()
+  textInput.visible = true
+  textInput.placeholder = placeHolder
+  textInput.isPointerBlocker = true
+  textInput.onTextSubmit = new OnTextSubmit(({ text }) => {
+    container.visible = false
+    onTextSubmit(text.toUpperCase())
+  })
 }
 
 export function showMessage(titleText: string, text: string, delay: number) {
-    container.visible = true
-    messageText.visible = true
-    messageText.value = text.toUpperCase()
-    inputName.visible = false
-    textInput.visible = false
-    title.value = titleText.toUpperCase()
-    setTimeout(delay, () => {
-        container.visible = false
-    })
+  container.visible = true
+  messageText.visible = true
+  messageText.value = text.toUpperCase()
+  inputName.visible = false
+  textInput.visible = false
+  title.value = titleText.toUpperCase()
+  setTimeout(delay, () => {
+    container.visible = false
+  })
 }

@@ -12,20 +12,20 @@ engine.addEntity(baseScene)
 // Add palette
 const palette = new MultiplayerPalette()
 palette.addComponent(
-    new Transform({
-        position: new Vector3(8.5, 1, 3),
-        rotation: Quaternion.Euler(0, 150, 0),
-        scale: new Vector3(1, 1, 1),
-    })
+  new Transform({
+    position: new Vector3(8.5, 1, 3),
+    rotation: Quaternion.Euler(0, 150, 0),
+    scale: new Vector3(1, 1, 1)
+  })
 )
 
 // Add mural
 const mural: MultiplayerMural = new MultiplayerMural()
 mural.addComponent(
-    new Transform({
-        position: new Vector3(8, 0, 12),
-        rotation: Quaternion.Euler(0, 90, 0),
-    })
+  new Transform({
+    position: new Vector3(8, 0, 12),
+    rotation: Quaternion.Euler(0, 90, 0)
+  })
 )
 
 // Add publish button
@@ -37,26 +37,19 @@ button.addComponent(new Transform({ position: new Vector3(8, 0, 8) }))
 
 // Initialize the entities. We are using a timeout so the scene can load first
 setTimeout(2000, () => {
-    mural.startLoading()
-    palette.startLoading()
-    palette.startSyncing();
-
+  mural.startLoading()
+  palette.startLoading()
+  palette.startSyncing()
 })
 
 // When the user enters the scene, it starts syncing with other players
-addOneTimeTrigger(
-    new Vector3(8, 0, 8),
-    new Vector3(15, 8, 15),
-    () => {
-        mural.startSyncing()
-        palette.show();
-    })
+addOneTimeTrigger(new Vector3(8, 0, 8), new Vector3(15, 8, 15), () => {
+  mural.startSyncing()
+  palette.show()
+})
 
 // When the user is near the mural, then start showing it
-addOneTimeTrigger(
-    new Vector3(10, 0, 8),
-    new Vector3(1, 8, 1),
-    () => {
-        mural.show()
-        button.show() // Show the button here, to make sure that everything is synced
-    })
+addOneTimeTrigger(new Vector3(10, 0, 8), new Vector3(1, 8, 1), () => {
+  mural.show()
+  button.show() // Show the button here, to make sure that everything is synced
+})

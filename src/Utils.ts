@@ -42,7 +42,7 @@ export function addOneTimeTrigger(
           entered = true
           onFirstPlayerEnter()
         }
-      },
+      }
     })
   )
 

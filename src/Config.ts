@@ -1,4 +1,4 @@
-import { SwatchIndex } from "./entities/palette/MultiplayerPalette"
+import { SwatchIndex } from './entities/palette/MultiplayerPalette'
 
 // Mural structure information
 export const MURAL_SIZE: 32 | 16 = 32
